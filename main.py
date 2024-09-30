@@ -1,0 +1,1 @@
+print("This is the project of Mishchenia, Sokolova, Stoliaruk")
