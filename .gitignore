@@ -182,7 +182,6 @@ pyrightconfig.json
 
 # Docker
 # Ignore Docker related files
-Dockerfile
 .dockerignore
 docker-compose.yml
 docker-compose.override.yml
