@@ -1,12 +1,13 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
-from basic_dfs.basic_df_stoliaruk import basic_test_df
+from basic_dfs import basic_df_stoliaruk
 
 spark_session = (SparkSession.builder
                  .master("local")
                  .appName("task app")
                  .config(conf=SparkConf())
                  .getOrCreate())
-df = basic_test_df(spark_session)
-df.show()g
+
+basic_df_stoliaruk.basic_test_df().show()
+
 spark_session.stop()
