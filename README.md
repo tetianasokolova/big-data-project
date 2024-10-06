@@ -1,2 +1,0 @@
-# big-data-project
-sokolova
