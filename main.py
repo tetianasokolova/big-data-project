@@ -1,7 +1,7 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession
 from basic_dfs import basic_df_stoliaruk
-from basic_dfs.basic_df_sokolova import basic_test_df
+from basic_dfs import basic_df_sokolova
 from basic_dfs import basic_df_mishcenia
 
 spark_session = (SparkSession.builder
@@ -11,6 +11,6 @@ spark_session = (SparkSession.builder
                  .getOrCreate())
 
 basic_df_stoliaruk.basic_test_df().show()
-basic_test_df().show()
+basic_df_sokolova.basic_test_df().show()
 basic_df_mishcenia.basic_test_df().show()
 spark_session.stop()
