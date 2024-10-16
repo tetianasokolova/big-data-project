@@ -1,5 +1,5 @@
-from setting import NAME_BASICS_DF_PATH
-from my_io import read_name_basics_df
+from setting import NAME_BASICS_DF_PATH, NAME_BASICS_DF_SAVE_PATH
+from my_io import read_name_basics_df, write_name_basics_df_to_csv
 
 name_basics_df = read_name_basics_df(NAME_BASICS_DF_PATH)
-name_basics_df.show()
+write_name_basics_df_to_csv(name_basics_df, NAME_BASICS_DF_SAVE_PATH)

@@ -3,6 +3,7 @@ from pyspark.sql import SparkSession
 import pyspark.sql.types as t
 import pyspark.sql.functions as f
 
+# reading
 def read_name_basics_df(path):
     # create spark session
     spark_session = ((SparkSession.builder
@@ -29,9 +30,16 @@ def read_name_basics_df(path):
                                             nullValue='\\N',
                                             schema=name_basics_df_schema)
 
-    # Transform the data in 'primaryProfession' and 'knownForTitles' from the comma-separated strings into arrays
-    name_basics_df = (name_basics_df
-                      .withColumn('primaryProfession', f.split(f.col("primaryProfession"), ","))
-                      .withColumn('knownForTitles', f.split(f.col("knownForTitles"), ",")
-                                  ))
+    # transform the data in 'primaryProfession' and 'knownForTitles' from the comma-separated strings into arrays
+    # name_basics_df = (name_basics_df
+    #                   .withColumn('primaryProfession', f.split(f.col("primaryProfession"), ","))
+    #                   .withColumn('knownForTitles', f.split(f.col("knownForTitles"), ",")
+    #                               ))
     return name_basics_df
+
+# writing
+def write_name_basics_df_to_csv(df, path):
+    df.write.csv(path,
+                 header=True,
+                 nullValue='null',
+                 mode="overwrite")
