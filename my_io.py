@@ -28,4 +28,10 @@ def read_name_basics_df(path):
                                             header=True,
                                             nullValue='\\N',
                                             schema=name_basics_df_schema)
+
+    # Transform the data in 'primaryProfession' and 'knownForTitles' from the comma-separated strings into arrays
+    name_basics_df = (name_basics_df
+                      .withColumn('primaryProfession', f.split(f.col("primaryProfession"), ","))
+                      .withColumn('knownForTitles', f.split(f.col("knownForTitles"), ",")
+                                  ))
     return name_basics_df
