@@ -8,10 +8,12 @@ def change_column_names(name_basics_df):
                                     .withColumnRenamed('knownForTitles', 'known_for_titles'))
     return name_basics_df
 
-def change_type_names(name_basics_df):
-    pass
+def change_n_to_none(name_basics_df):
+    name_basics_df = name_basics_df.withColumn('death_year',
+                                               f.when(f.col('death_year').isin("\\N"), None).otherwise(f.col('death_year')))
+    return name_basics_df
 
 def name_basics_postprocess(name_basics_df):
-    name_basics_df=change_column_names(name_basics_df)
-    # name_basics_df=change_type_names(name_basics_df)
+    name_basics_df = change_column_names(name_basics_df)
+    name_basics_df = change_n_to_none(name_basics_df)
     return name_basics_df
