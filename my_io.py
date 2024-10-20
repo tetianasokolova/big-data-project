@@ -24,7 +24,6 @@ def read_title_principals_df(path):
     name_basics_df = spark_session.read.csv(path,
                                             sep="\t",
                                             header=True,
-                                            nullValue='\\N',
                                             schema=title_principals_df_schema)
     return name_basics_df
 
@@ -52,15 +51,9 @@ def read_name_basics_df(path):
     name_basics_df = spark_session.read.csv(path,
                                             sep="\t",
                                             header=True,
-                                            nullValue='\\N',
                                             schema=name_basics_df_schema)
     return name_basics_df
 
-# write df
-def write_df_to_csv(df, path):
-    df.write.csv(path,
-                 header=True,
-                 nullValue='null',
-                 mode="overwrite",
-                 encoding='utf-8',
-                 sep=',')
+# write name_basics_df
+def write_name_basics_df_to_csv(df, path):
+    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
