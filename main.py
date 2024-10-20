@@ -1,16 +1,8 @@
-# from pyspark import SparkConf
-# from pyspark.sql import SparkSession
-# from basic_dfs import basic_df_stoliaruk
-# from basic_dfs import basic_df_sokolova
-# from basic_dfs import basic_df_mishcenia
-#
-# spark_session = (SparkSession.builder
-#                  .master("local")
-#                  .appName("task app")
-#                  .config(conf=SparkConf())
-#                  .getOrCreate())
-#
-# basic_df_stoliaruk.basic_test_df().show()
-# basic_df_sokolova.basic_test_df().show()
-# basic_df_mishcenia.basic_test_df().show()
-# spark_session.stop()
+from setting import TITLE_PRINCIPALS_DF_PATH, NAME_BASICS_DF_PATH, NAME_BASICS_DF_SAVE_PATH
+from my_io import read_title_principals_df, read_name_basics_df, write_name_basics_df_to_csv
+
+title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
+# title_principals_df.show()
+
+name_basics_df = read_name_basics_df(NAME_BASICS_DF_PATH)
+# name_basics_df.show()
