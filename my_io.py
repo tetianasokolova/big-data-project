@@ -42,9 +42,27 @@ def read_title_crew_df(path):
     return title_crew_df
 
 
+def read_title_ratings_df(path):
+    spark_session = (SparkSession.builder
+                     .master("local")
+                     .appName("task app")
+                     .config(conf=SparkConf())
+                     .getOrCreate())
+    title_ratings_df_schema=t.StructType([
+        t.StructField('tconst',t.StringType(),nullable=False),
+        t.StructField('averageRating',t.DoubleType(),False),
+        t.StructField('numVotes',t.IntegerType(),True)])
+    title_ratings_df = spark_session.read.option('sep', '\t').csv(path,header=True,nullValue='null',schema=title_ratings_df_schema)
+
+    return title_ratings_df
+
+def write_title_ratings_df_to_csv(df,path):
+    df.write.csv(path,header=True,mode='overwrite',encoding='utf-8',sep=',')
+
+
 def write_title_crew_df_to_csv(df, path):
     df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
 
 
 def write_akas_df_to_csv(df, path):
-    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',', emptyValue='nan')
+    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
