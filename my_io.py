@@ -57,8 +57,10 @@ def read_name_basics_df(path):
     return name_basics_df
 
 # write df
-def write_name_basics_df_to_csv(df, path):
+def write_df_to_csv(df, path):
     df.write.csv(path,
                  header=True,
                  nullValue='null',
-                 mode="overwrite")
+                 mode="overwrite",
+                 encoding='utf-8',
+                 sep=',')
