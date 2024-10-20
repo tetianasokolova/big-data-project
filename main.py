@@ -14,3 +14,13 @@
 # basic_df_sokolova.basic_test_df().show()
 # basic_df_mishcenia.basic_test_df().show()
 # spark_session.stop()
+
+from setting import AKAS_DF_PATH,AKAS_DF_RESULTS_PATH
+
+from my_io import read_akas_df,write_akas_df_to_csv
+from dfs_postprocess.title_akas_postprocess import title_akas_postprocess
+
+akas_df=read_akas_df(AKAS_DF_PATH)
+akas_df=title_akas_postprocess(akas_df)
+akas_df.show()
+write_akas_df_to_csv(akas_df,AKAS_DF_RESULTS_PATH)
