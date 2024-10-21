@@ -50,3 +50,7 @@ def read_title_episode_df(path):
                                                                  schema=title_episode_df_schema)
     return title_episode_df
 
+
+def write_title_episode_df_to_csv(df, path):
+    df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
+
