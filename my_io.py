@@ -30,3 +30,23 @@ def read_title_basics_df(path):
 def write_title_basics_df_to_csv(df, path):
     df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
 
+
+def read_title_episode_df(path):
+    spark_session = (SparkSession.builder
+                     .master("local")
+                     .appName("task app")
+                     .config(conf=SparkConf())
+                     .getOrCreate())
+
+    title_episode_df_schema = t.StructType([
+        t.StructField('tconst', t.StringType(), True),
+        t.StructField('parentTconst', t.StringType(), True),
+        t.StructField('seasonNumber', t.IntegerType(), True),
+        t.StructField('episodeNumber', t.IntegerType(), True)])
+
+    title_episode_df = spark_session.read.option('sep', '\t').csv(path,
+                                                                 header=True,
+                                                                 nullValue='null',
+                                                                 schema=title_episode_df_schema)
+    return title_episode_df
+

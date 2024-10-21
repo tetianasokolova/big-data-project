@@ -1,8 +1,11 @@
 from dfs_postprocess.title_basic_postprocess import title_basics_postprocess
-from my_io import read_title_basics_df, write_title_basics_df_to_csv
-from setting import TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH
+from my_io import read_title_basics_df, write_title_basics_df_to_csv, read_title_episode_df
+from setting import TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH, TITLE_EPISODE_DF_PATH
 
 title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
 title_basics_df = title_basics_postprocess(title_basics_df)
 write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
+
+
+title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
 
