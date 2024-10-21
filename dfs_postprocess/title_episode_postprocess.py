@@ -1,3 +1,5 @@
+from pyspark.sql.functions import col, when
+
 def change_column_names(title_episode_df):
     new_col_names = ['tconst', 'parent_tconst', 'season_number', 'episode_number']
     for idx, old_col in enumerate(title_episode_df.columns):
@@ -5,7 +7,15 @@ def change_column_names(title_episode_df):
     return title_episode_df
 
 
+def change_n_to_none(title_episode_df):
+    columns_with_n = ['season_number', 'episode_number']
+    for column in columns_with_n:
+        title_episode_df = title_episode_df.withColumn(column, when(col(column).isin("\\N"), None).otherwise(col(column)))
+    return title_episode_df
+
+
 def title_episode_postprocess(title_episode_df):
     title_episode_df = change_column_names(title_episode_df)
+    title_episode_df = change_n_to_none(title_episode_df)
     return title_episode_df
 
