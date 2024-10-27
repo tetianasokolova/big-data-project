@@ -22,10 +22,22 @@ def fill_null_region_values(title_akas_df):
                                .otherwise(f.col('region')))
     return title_akas_df
 
+def drop_types_column(title_akas_df):
+    return title_akas_df.drop(f.col('types'))
+
+def drop_attributes_column(title_akas_df):
+    return title_akas_df.drop(f.col('attributes'))
+
+def drop_is_original_title_column(title_akas_df):
+    return title_akas_df.drop(f.col('is_original_title'))
+
 def title_akas_postprocess(title_akas_df):
     title_akas_df = change_column_names(title_akas_df)
     title_akas_df = change_is_original_title_column_type(title_akas_df)
     title_akas_df = change_n_to_none(title_akas_df)
     title_akas_df=fill_null_region_values(title_akas_df)
+    title_akas_df=drop_types_column(title_akas_df)
+    title_akas_df=drop_attributes_column(title_akas_df)
+    title_akas_df=drop_is_original_title_column(title_akas_df)
 
     return title_akas_df
