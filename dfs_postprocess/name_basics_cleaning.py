@@ -35,6 +35,7 @@ def fill_null_primary_profession(name_basics_df):
 def fill_null_known_for_titles(name_basics_df):
     return name_basics_df.fillna('unknown_title', subset=['known_for_titles'])
 
+# it was checked before that there are no duplicates
 def name_basics_cleaning(name_basics_df):
     name_basics_df = drop_birth_year_column(name_basics_df)
     name_basics_df = drop_death_year_column(name_basics_df)
