@@ -17,7 +17,9 @@ from dfs_postprocess.name_basics_postprocess import name_basics_postprocess
 from dfs_postprocess.title_principals_postprocess import title_principals_postprocess
 from dfs_postprocess.title_basic_postprocess import title_basics_postprocess
 from dfs_postprocess.title_episode_postprocess import title_episode_postprocess
+from questions import questions_mishchenia
 
+#dataframes processing
 akas_df = read_akas_df(AKAS_DF_PATH)
 akas_df = title_akas_postprocess(akas_df)
 write_akas_df_to_csv(akas_df, AKAS_DF_RESULTS_PATH)
@@ -45,3 +47,9 @@ write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
 title_episode_df = title_episode_postprocess(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
+
+#questions
+titles_with_rating_above_5=questions_mishchenia.titles_with_rating_above_5(title_ratings_df)
+titles_with_ukrainian_translation=questions_mishchenia.titles_with_ukrainian_translation(akas_df)
+william_dickson_films=questions_mishchenia.william_dickson_films(title_crew_df)
+
