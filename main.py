@@ -21,6 +21,7 @@ from dfs_postprocess.title_principals_postprocess import title_principals_postpr
 from dfs_postprocess.title_principals_cleaning import title_principals_cleaning
 from dfs_postprocess.title_basic_postprocess import title_basics_postprocess
 from dfs_postprocess.title_episode_postprocess import title_episode_postprocess
+from questions import questions_mishchenia
 from questions import questions_sokolova
 
 # dataframes processing
@@ -55,6 +56,10 @@ title_episode_df = title_episode_postprocess(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 
 # questions
+titles_with_rating_above_5=questions_mishchenia.titles_with_rating_above_5(title_ratings_df)
+titles_with_ukrainian_translation=questions_mishchenia.titles_with_ukrainian_translation(akas_df)
+william_dickson_films=questions_mishchenia.william_dickson_films(title_crew_df)
+
 # question 24
 title_rating_with_votes_above_10000 = (questions_sokolova
                                            .title_rating_with_votes_above_10000(title_ratings_df))
