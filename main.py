@@ -18,6 +18,7 @@ from dfs_postprocess.title_principals_postprocess import title_principals_postpr
 from dfs_postprocess.title_basics_postprocess import title_basics_postprocess
 from dfs_postprocess.title_episode_postprocess import title_episode_postprocess
 from questions import questions_mishchenia
+from dfs_postprocess.title_basics_cleaning import cleaning_title_basics_df
 
 #dataframes processing
 akas_df = read_akas_df(AKAS_DF_PATH)
@@ -42,6 +43,7 @@ write_name_basics_df_to_csv(name_basics_df, NAME_BASICS_DF_RESULTS_PATH)
 
 title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
 title_basics_df = title_basics_postprocess(title_basics_df)
+title_basics_df = cleaning_title_basics_df(title_basics_df)
 write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 
 title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
