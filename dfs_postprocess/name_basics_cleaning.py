@@ -40,4 +40,5 @@ def name_basics_cleaning(name_basics_df):
     name_basics_df = drop_death_year_column(name_basics_df)
     name_basics_df = drop_primary_name_null_rows(name_basics_df)
     name_basics_df = fill_null_primary_profession(name_basics_df)
+    name_basics_df = fill_null_known_for_titles(name_basics_df)
     return name_basics_df
