@@ -184,3 +184,5 @@ def write_title_basics_df_to_csv(df, path):
 def write_title_episode_df_to_csv(df, path):
     df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
 
+def write_df_to_csv(df, path):
+    df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
