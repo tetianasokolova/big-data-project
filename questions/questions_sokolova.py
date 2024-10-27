@@ -10,6 +10,12 @@ def raquel_welch_primary_profession(name_basics_df):
     return (name_basics_df.filter(f.col('nconst') == 'nm0000079')
                           .select(['primary_name', 'primary_profession']))
 
+# question 26: які унікальні ідентифікатори та локальні назви для фільмів з регіону
+# 'DE' (Німеччина) або 'CH' (Швейцарія)?
+def titles_with_german_or_swiss_region(akas_df):
+    return (akas_df.filter(f.col('region').isin(['DE', 'CH']))
+                   .select(['title_id', 'title', 'region']))
+
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
     cols = df.columns
