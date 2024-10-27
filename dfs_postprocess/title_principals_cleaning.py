@@ -6,6 +6,7 @@ def drop_job_column(title_principals_df):
 def drop_characters_column(title_principals_df):
     return title_principals_df.drop(f.col('characters'))
 
+# it was checked before that there are no duplicates
 def title_principals_cleaning(title_principals_df):
     title_principals_df = drop_job_column(title_principals_df)
     title_principals_df = drop_characters_column(title_principals_df)
