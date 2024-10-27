@@ -25,12 +25,15 @@ def fill_null_primary_profession(name_basics_df):
     mode_profession_df = (profession_counts.orderBy(f.col('count').desc())
                                         .select('primary_profession')
                                         .first())
-
+    # the most frequent profession is 'actor'
     mode_profession_value = mode_profession_df['primary_profession']
 
     # fill missed values with mode
     name_basics_df = name_basics_df.fillna(mode_profession_value, subset=['primary_profession'])
     return name_basics_df
+
+def fill_null_known_for_titles(name_basics_df):
+    return name_basics_df.fillna('unknown_title', subset=['known_for_titles'])
 
 def name_basics_cleaning(name_basics_df):
     name_basics_df = drop_birth_year_column(name_basics_df)
