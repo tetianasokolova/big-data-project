@@ -1,7 +1,6 @@
 from pyspark import SparkConf
 from pyspark.sql import SparkSession, Window
 import pyspark.sql.types as t
-import pyspark.sql.functions as f
 
 def read_akas_df(path):
     spark_session = (SparkSession.builder
