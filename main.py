@@ -17,9 +17,11 @@ from dfs_postprocess.name_basics_postprocess import name_basics_postprocess
 from dfs_postprocess.title_principals_postprocess import title_principals_postprocess
 from dfs_postprocess.title_basics_postprocess import title_basics_postprocess
 from dfs_postprocess.title_episode_postprocess import title_episode_postprocess
-from questions import questions_mishchenia
 from dfs_postprocess.title_basics_cleaning import cleaning_title_basics_df
 from dfs_postprocess.title_episode_cleaning import cleaning_title_episode
+from questions import questions_mishchenia
+from questions import questions_stoliaruk
+
 
 
 #dataframes processing
@@ -58,3 +60,4 @@ titles_with_rating_above_5=questions_mishchenia.titles_with_rating_above_5(title
 titles_with_ukrainian_translation=questions_mishchenia.titles_with_ukrainian_translation(akas_df)
 william_dickson_films=questions_mishchenia.william_dickson_films(title_crew_df)
 
+episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
