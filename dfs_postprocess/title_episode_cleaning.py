@@ -13,7 +13,15 @@ def delete_error_values_from_season_number(title_episode_df):
     return title_episode_df
 
 
+def fill_na_season_number(title_episode_df):
+    title_episode_df = title_episode_df.withColumn(
+        "season_number",
+        f.when(f.col("season_number").isNull(), 1).otherwise(f.col("season_number")))
+    return title_episode_df
+
+
 def cleaning_title_episode(title_episode_df):
     title_episode_df = delete_episode_number(title_episode_df)
     title_episode_df = delete_error_values_from_season_number(title_episode_df)
+    title_episode_df = fill_na_season_number(title_episode_df)
     return title_episode_df
