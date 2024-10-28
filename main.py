@@ -62,3 +62,4 @@ william_dickson_films=questions_mishchenia.william_dickson_films(title_crew_df)
 
 episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
 more_than_2_hours_long_films = questions_stoliaruk.more_than_2_hours_long_films(title_basics_df)
+children_friendly_films = questions_stoliaruk.children_friendly_films(title_basics_df)
