@@ -13,6 +13,7 @@ def change_n_to_none(name_basics_df):
                                                f.when(f.col('death_year').isin("\\N"), None).otherwise(f.col('death_year')))
     return name_basics_df
 
+# decided not to use this function for postprocessing because it triples number of columns
 # Split columns primary_profession and known_for_titles with multiple values into rows
 def split_multivalued_columns(name_basics_df):
     name_basics_df = name_basics_df.withColumn('primary_profession',
@@ -24,5 +25,5 @@ def split_multivalued_columns(name_basics_df):
 def name_basics_postprocess(name_basics_df):
     name_basics_df = change_column_names(name_basics_df)
     name_basics_df = change_n_to_none(name_basics_df)
-    name_basics_df = split_multivalued_columns(name_basics_df)
+    # name_basics_df = split_multivalued_columns(name_basics_df)
     return name_basics_df
