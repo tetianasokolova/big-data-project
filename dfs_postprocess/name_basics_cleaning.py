@@ -12,7 +12,7 @@ def drop_primary_name_null_rows(name_basics_df):
 def fill_null_primary_profession(name_basics_df):
     # split the primary_profession column to compute the mode
     name_basics_split_df = name_basics_df.withColumn('primary_profession',
-                                               f.explode(f.split(f.col('primary_profession'), ',')))
+                                                     f.explode(f.col('primary_profession')))
 
     # select primary profession row
     profession_df = name_basics_split_df.select(f.col('primary_profession'))
@@ -29,11 +29,16 @@ def fill_null_primary_profession(name_basics_df):
     mode_profession_value = mode_profession_df['primary_profession']
 
     # fill missed values with mode
-    name_basics_df = name_basics_df.fillna(mode_profession_value, subset=['primary_profession'])
+    name_basics_df = name_basics_df.withColumn('primary_profession',
+                                               f.when(f.col('primary_profession').isNull(), f.lit([mode_profession_value]))
+                                                .otherwise(f.col('primary_profession')))
     return name_basics_df
 
 def fill_null_known_for_titles(name_basics_df):
-    return name_basics_df.fillna('unknown_title', subset=['known_for_titles'])
+    name_basics_df = name_basics_df.withColumn('known_for_titles',
+                                               f.when(f.col('known_for_titles').isNull(), f.lit([]))
+                                                .otherwise(f.col('known_for_titles')))
+    return name_basics_df
 
 # it was checked before that there are no duplicates
 def name_basics_cleaning(name_basics_df):
