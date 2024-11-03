@@ -26,6 +26,19 @@ def count_movies_per_year(title_basics_df):
                                                         .orderBy('start_year', ascending=True))
     return count_movies_per_year_df
 
+# question 4: які 5 основних професій є найпоширенішими серед всіх осіб у базі?
+def three_popular_professions(name_basics_df):
+    # split the primary_profession column and select it
+    professions_df = (name_basics_df.withColumn('primary_profession',
+                                                f.explode(f.col('primary_profession')))
+                                    .select(f.col('primary_profession')))
+    # compute the count for each profession
+    profession_counts = professions_df.groupBy('primary_profession').count()
+    three_popular_professions_df = (profession_counts.orderBy('count', ascending=False)
+                                                     .select('primary_profession')
+                                                     .limit(5))
+    return three_popular_professions_df
+
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
     cols = df.columns
