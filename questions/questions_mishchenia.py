@@ -1,4 +1,5 @@
 import pyspark.sql.functions as f
+from pyspark.sql import Window
 
 
 def titles_with_rating_above_5(title_rating_df):
@@ -40,3 +41,14 @@ def region_with_the_biggest_translations(title_akas_df):
 
     translations_by_region = filtered_df.groupBy("region").agg(f.count("title_id").alias("translation_count"))
     return translations_by_region.orderBy(f.col("translation_count").desc()).limit(1)
+
+# 31. Які фільми з високим середнім рейтингом (понад 8.0) мають найбільшу кількість голосів і займають топ-10 місць за кількістю голосів?
+
+def top_highly_rated_movies_by_votes(title_ratings_df):
+    high_rated_movies = title_ratings_df.filter((f.col("average_rating") > 8.0))
+
+    window_spec = Window.orderBy(f.col("num_votes").desc())
+    ranked_high_rated_movies = high_rated_movies.withColumn("rank", f.rank().over(window_spec))
+
+    top_10_high_rated_movies = ranked_high_rated_movies.filter(f.col("rank") <= 10)
+    return top_10_high_rated_movies

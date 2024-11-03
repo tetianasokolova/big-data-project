@@ -28,9 +28,9 @@ from questions import questions_sokolova
 from questions import questions_stoliaruk
 
 # dataframes processing
-akas_df = read_akas_df(AKAS_DF_PATH)
-akas_df = title_akas_postprocess(akas_df)
-questions_mishchenia.region_with_the_biggest_translations(akas_df).show()
+# akas_df = read_akas_df(AKAS_DF_PATH)
+# akas_df = title_akas_postprocess(akas_df)
+
 # write_akas_df_to_csv(akas_df, AKAS_DF_RESULTS_PATH)
 #
 # title_crew_df = read_title_crew_df(TITLE_CREW_DF_PATH)
@@ -38,8 +38,9 @@ questions_mishchenia.region_with_the_biggest_translations(akas_df).show()
 
 # write_title_crew_df_to_csv(title_crew_df, TITLE_CREW_DF_RESULTS_PATH)
 #
-# title_ratings_df = read_title_ratings_df(TITLE_RATINGS_DF_PATH)
-# title_ratings_df = title_rating_postprocess(title_ratings_df)
+title_ratings_df = read_title_ratings_df(TITLE_RATINGS_DF_PATH)
+title_ratings_df = title_rating_postprocess(title_ratings_df)
+questions_mishchenia.top_highly_rated_movies_by_votes(title_ratings_df).show()
 # write_title_ratings_df_to_csv(title_ratings_df, TITLE_RATINGS_DF_RESULTS_PATH)
 
 # title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
@@ -92,4 +93,5 @@ questions_mishchenia.region_with_the_biggest_translations(akas_df).show()
 #     questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).show())
 # genre_with_the_biggest_avg_film_time=(
 #     questions_mishchenia.genre_with_the_biggest_avg_film_time(title_basics_df,5).show())
+#questions_mishchenia.region_with_the_biggest_translations(akas_df).show()
 
