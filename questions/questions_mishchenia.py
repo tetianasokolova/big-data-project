@@ -23,3 +23,20 @@ def actors_with_the_biggest_count_films(title_principals_df, actors_number):
             .limit(actors_number))
 
 
+# 17. Фільми якого жанру мають найдовшу cередню тривалість?
+def genre_with_the_biggest_avg_film_time(title_basics_df, genres_count):
+    filtered_movies = title_basics_df.filter(
+        (f.col("runtime_minutes").isNotNull()) & (f.col("genres").isNotNull())
+    )
+    average_time_by_ganre = filtered_movies.groupBy("genres").agg(f.avg("runtime_minutes").alias("avg_duration"))
+    return average_time_by_ganre.orderBy(f.col("avg_duration").desc()).limit(genres_count)
+
+
+# 30. В якому регіоні найбільше перекладених філмів(окрім оригінальних)?
+def region_with_the_biggest_translations(title_akas_df):
+    filtered_df = title_akas_df.filter(
+        (f.col("region") != "original_region")
+    )
+
+    translations_by_region = filtered_df.groupBy("region").agg(f.count("title_id").alias("translation_count"))
+    return translations_by_region.orderBy(f.col("translation_count").desc()).limit(1)

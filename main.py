@@ -28,8 +28,9 @@ from questions import questions_sokolova
 from questions import questions_stoliaruk
 
 # dataframes processing
-# akas_df = read_akas_df(AKAS_DF_PATH)
-# akas_df = title_akas_postprocess(akas_df)
+akas_df = read_akas_df(AKAS_DF_PATH)
+akas_df = title_akas_postprocess(akas_df)
+questions_mishchenia.region_with_the_biggest_translations(akas_df).show()
 # write_akas_df_to_csv(akas_df, AKAS_DF_RESULTS_PATH)
 #
 # title_crew_df = read_title_crew_df(TITLE_CREW_DF_PATH)
@@ -41,10 +42,10 @@ from questions import questions_stoliaruk
 # title_ratings_df = title_rating_postprocess(title_ratings_df)
 # write_title_ratings_df_to_csv(title_ratings_df, TITLE_RATINGS_DF_RESULTS_PATH)
 
-title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
-title_principals_df = title_principals_postprocess(title_principals_df)
-title_principals_df = title_principals_cleaning(title_principals_df)
-questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).show()
+# title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
+# title_principals_df = title_principals_postprocess(title_principals_df)
+# title_principals_df = title_principals_cleaning(title_principals_df)
+
 
 
 # write_title_principals_df_to_csv(title_principals_df, TITLE_PRINCIPALS_RESULTS_PATH)
@@ -57,6 +58,7 @@ questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).
 # title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
 # title_basics_df = title_basics_postprocess(title_basics_df)
 # title_basics_df = cleaning_title_basics_df(title_basics_df)
+
 # write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 #
 # title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
@@ -85,3 +87,9 @@ questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).
 # episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
 # more_than_2_hours_long_films = questions_stoliaruk.more_than_2_hours_long_films(title_basics_df)
 # children_friendly_films = questions_stoliaruk.children_friendly_films(title_basics_df)
+
+# actors_with_the_biggest_count_films=(
+#     questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).show())
+# genre_with_the_biggest_avg_film_time=(
+#     questions_mishchenia.genre_with_the_biggest_avg_film_time(title_basics_df,5).show())
+
