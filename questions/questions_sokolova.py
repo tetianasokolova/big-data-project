@@ -39,6 +39,16 @@ def three_popular_professions(name_basics_df):
                                                      .limit(5))
     return three_popular_professions_df
 
+# question 16: хто з режисерів працював над найбільшою кількістю фільмів?
+def top_director_by_film_count(title_crew_df):
+    count_films_per_director = (title_crew_df.groupBy('directors')
+                                             .count()
+                                             .orderBy('count', ascending=False))
+    top_director_by_film_count_df = (count_films_per_director.select(f.col('directors'))
+                                                             .filter(f.col('directors').isNotNull())
+                                                             .limit(1))
+    return top_director_by_film_count_df
+
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
     cols = df.columns
