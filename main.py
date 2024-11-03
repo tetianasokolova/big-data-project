@@ -34,6 +34,7 @@ from questions import questions_stoliaruk
 #
 # title_crew_df = read_title_crew_df(TITLE_CREW_DF_PATH)
 # title_crew_df = title_crew_postprocess(title_crew_df)
+
 # write_title_crew_df_to_csv(title_crew_df, TITLE_CREW_DF_RESULTS_PATH)
 #
 # title_ratings_df = read_title_ratings_df(TITLE_RATINGS_DF_PATH)
@@ -43,7 +44,8 @@ from questions import questions_stoliaruk
 title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
 title_principals_df = title_principals_postprocess(title_principals_df)
 title_principals_df = title_principals_cleaning(title_principals_df)
-title_principals_df.select('category').distinct().show(100, False)
+questions_mishchenia.actors_with_the_biggest_count_films(title_principals_df,5).show()
+
 
 # write_title_principals_df_to_csv(title_principals_df, TITLE_PRINCIPALS_RESULTS_PATH)
 #
