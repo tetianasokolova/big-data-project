@@ -14,7 +14,7 @@ def william_dickson_films(title_crew_df):
     return title_crew_df.filter(f.col('directors') == 'nm0005690')
 
 
-# Які актори знімалися в найбільшій кількості фільмів чи серіалів?
+#1. Які актори знімалися в найбільшій кількості фільмів чи серіалів?
 def actors_with_the_biggest_count_films(title_principals_df, actors_number):
     actors_df = title_principals_df.filter(
         (f.col("category") == "actor") | (f.col("category") == "actress"))
@@ -42,6 +42,7 @@ def region_with_the_biggest_translations(title_akas_df):
     translations_by_region = filtered_df.groupBy("region").agg(f.count("title_id").alias("translation_count"))
     return translations_by_region.orderBy(f.col("translation_count").desc()).limit(1)
 
+
 # 31. Які фільми з високим середнім рейтингом (понад 8.0) мають найбільшу кількість голосів і займають топ-10 місць за кількістю голосів?
 
 def top_highly_rated_movies_by_votes(title_ratings_df):
@@ -52,3 +53,13 @@ def top_highly_rated_movies_by_votes(title_ratings_df):
 
     top_10_high_rated_movies = ranked_high_rated_movies.filter(f.col("rank") <= 10)
     return top_10_high_rated_movies
+
+
+# 32. Які п'ять фільмів у кожному жанрі мають найвищу тривалість?
+def top_5_longest_movies_by_genre(title_basics_df):
+    filtered_movies = title_basics_df.filter((f.col("genres").isNotNull()))
+
+    window = Window.partitionBy("genres").orderBy(f.col("runtime_minutes").desc())
+    ranked_movies = filtered_movies.withColumn("row_number", f.row_number().over(window))
+
+    return ranked_movies.filter(f.col("row_number") <= 5)
