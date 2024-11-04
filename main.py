@@ -84,3 +84,4 @@ children_friendly_films = questions_stoliaruk.children_friendly_films(title_basi
 
 # grouping and window functions by Stoliaruk
 most_released_years = questions_stoliaruk.most_released_years(title_basics_df)
+genre_count_per_year = questions_stoliaruk.genre_count_per_year(title_basics_df)
