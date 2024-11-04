@@ -5,7 +5,9 @@ from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
                      TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH)
 from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH,
-                     TITLES_WITH_GERMAN_OR_SWISS_REGION)
+                     TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
+                     THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
+                     RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH)
 from my_io import read_akas_df, write_akas_df_to_csv, read_title_crew_df, write_title_crew_df_to_csv, \
     read_title_ratings_df, write_title_ratings_df_to_csv
 from my_io import (read_title_principals_df, write_title_principals_df_to_csv,
@@ -27,14 +29,13 @@ from questions import questions_mishchenia
 from questions import questions_sokolova
 from questions import questions_stoliaruk
 
+# dataframes processing
 akas_df = read_akas_df(AKAS_DF_PATH)
 akas_df = title_akas_postprocess(akas_df)
-
 write_akas_df_to_csv(akas_df, AKAS_DF_RESULTS_PATH)
 
 title_crew_df = read_title_crew_df(TITLE_CREW_DF_PATH)
 title_crew_df = title_crew_postprocess(title_crew_df)
-
 write_title_crew_df_to_csv(title_crew_df, TITLE_CREW_DF_RESULTS_PATH)
 
 title_ratings_df = read_title_ratings_df(TITLE_RATINGS_DF_PATH)
@@ -44,7 +45,6 @@ write_title_ratings_df_to_csv(title_ratings_df, TITLE_RATINGS_DF_RESULTS_PATH)
 title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
 title_principals_df = title_principals_postprocess(title_principals_df)
 title_principals_df = title_principals_cleaning(title_principals_df)
-
 write_title_principals_df_to_csv(title_principals_df, TITLE_PRINCIPALS_RESULTS_PATH)
 
 name_basics_df = read_name_basics_df(NAME_BASICS_DF_PATH)
@@ -55,8 +55,6 @@ write_name_basics_df_to_csv(name_basics_df, NAME_BASICS_DF_RESULTS_PATH)
 title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
 title_basics_df = title_basics_postprocess(title_basics_df)
 title_basics_df = cleaning_title_basics_df(title_basics_df)
-questions_mishchenia.top_5_longest_movies_by_genre(title_basics_df).show()
-
 write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 
 title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
@@ -64,24 +62,23 @@ title_episode_df = title_episode_postprocess(title_episode_df)
 title_episode_df = cleaning_title_episode(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 
-# questions
+# filtering questions by Mishchenia
 titles_with_rating_above_5 = questions_mishchenia.titles_with_rating_above_5(title_ratings_df)
 titles_with_ukrainian_translation = questions_mishchenia.titles_with_ukrainian_translation(akas_df)
 william_dickson_films = questions_mishchenia.william_dickson_films(title_crew_df)
 
-# question 24
+# filtering questions by Sokolova
 title_rating_with_votes_above_10000 = (questions_sokolova
                                        .title_rating_with_votes_above_10000(title_ratings_df))
 write_df_to_csv(title_rating_with_votes_above_10000, TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH)
 
-# question 25
 raquel_welch_primary_profession = (questions_sokolova.raquel_welch_primary_profession(name_basics_df))
 write_df_to_csv(raquel_welch_primary_profession, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH)
 
-# question 26
 titles_with_german_or_swiss_region = questions_sokolova.titles_with_german_or_swiss_region(akas_df)
-write_df_to_csv(titles_with_german_or_swiss_region, TITLES_WITH_GERMAN_OR_SWISS_REGION)
+write_df_to_csv(titles_with_german_or_swiss_region, TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH)
 
+# filtering questions by Stoliaruk
 episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
 more_than_2_hours_long_films = questions_stoliaruk.more_than_2_hours_long_films(title_basics_df)
 children_friendly_films = questions_stoliaruk.children_friendly_films(title_basics_df)
@@ -95,3 +92,19 @@ region_with_the_biggest_translations = questions_mishchenia.region_with_the_bigg
 
 top_highly_rated_movies_by_votes = questions_mishchenia.top_highly_rated_movies_by_votes(title_ratings_df)
 top_5_longest_movies_by_genre = questions_mishchenia.top_5_longest_movies_by_genre(title_basics_df)
+
+# grouping and window functions by Sokolova
+count_movies_per_year = questions_sokolova.count_movies_per_year(title_basics_df)
+write_df_to_csv(count_movies_per_year, COUNT_MOVIES_PER_YEAR_PATH)
+
+three_popular_professions = questions_sokolova.three_popular_professions(name_basics_df)
+write_df_to_csv(three_popular_professions, THREE_POPULAR_PROFESSIONS_PATH)
+
+top_director_by_film_count = questions_sokolova.top_director_by_film_count(title_crew_df, name_basics_df)
+write_df_to_csv(top_director_by_film_count, TOP_DIRECTOR_BY_FILM_COUNT_PATH)
+
+runtime_diff_within_title_type = questions_sokolova.runtime_diff_within_title_type(title_basics_df)
+write_df_to_csv(runtime_diff_within_title_type, RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH)
+
+rank_by_runtime_within_start_year = questions_sokolova.rank_by_runtime_within_start_year(title_basics_df)
+write_df_to_csv(rank_by_runtime_within_start_year, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH)
