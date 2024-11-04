@@ -59,7 +59,7 @@ title_episode_df = title_episode_postprocess(title_episode_df)
 title_episode_df = cleaning_title_episode(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 
-# grouping functions by Sokolova
+# grouping and window functions by Sokolova
 count_movies_per_year = questions_sokolova.count_movies_per_year(title_basics_df)
 write_df_to_csv(count_movies_per_year, COUNT_MOVIES_PER_YEAR_PATH)
 
@@ -69,7 +69,6 @@ write_df_to_csv(three_popular_professions, THREE_POPULAR_PROFESSIONS_PATH)
 top_director_by_film_count = questions_sokolova.top_director_by_film_count(title_crew_df, name_basics_df)
 write_df_to_csv(top_director_by_film_count, TOP_DIRECTOR_BY_FILM_COUNT_PATH)
 
-# window functions by Sokolova
 runtime_diff_within_title_type = questions_sokolova.runtime_diff_within_title_type(title_basics_df)
 write_df_to_csv(runtime_diff_within_title_type, RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH)
 
