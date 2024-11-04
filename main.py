@@ -86,3 +86,5 @@ children_friendly_films = questions_stoliaruk.children_friendly_films(title_basi
 most_released_years = questions_stoliaruk.most_released_years(title_basics_df)
 genre_count_per_year = questions_stoliaruk.genre_count_per_year(title_basics_df)
 rating_count = questions_stoliaruk.rating_count(title_basics_df)
+
+average_movies_runtime_per_year = questions_stoliaruk.average_movies_runtime_per_year(title_basics_df)

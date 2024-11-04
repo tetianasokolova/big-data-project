@@ -1,4 +1,5 @@
 import pyspark.sql.functions as f
+from pyspark.sql import Window
 
 # 27. Скільки епізодів у серіалі "Twin Peaks" 1990 року?
 def episodes_of_twin_peaks_1990(title_episode_df):
@@ -31,3 +32,12 @@ def rating_count(title_ratings_df):
   return title_ratings_df.groupBy("average_rating") \
       .count() \
       .orderBy("average_rating")
+
+# 37. Яка середня тривалість фільмів кожного року?
+def average_movies_runtime_per_year(title_basics_df):
+    window_spec = Window.partitionBy(f.col("start_year")).orderBy(f.col("start_year").desc())
+    movies_df = title_basics_df.filter((f.col('title_type') == 'movie') & (f.col("start_year").isNotNull()))
+    average_runtime_df = movies_df.withColumn("average_runtime",
+                                              f.round(f.avg("runtime_minutes").over(window_spec), 1)) \
+        .select("start_year", "average_runtime")
+    return average_runtime_df
