@@ -53,6 +53,23 @@ def top_director_by_film_count(title_crew_df, name_basics_df):
                                                                   .select('nconst', 'primary_name'))
     return top_director_by_film_count_df
 
+# window functions
+# question 33: яка тривалість найдовшого фільму для кожного формату та
+# яка різниця між тривалістю кожного фільму та тривалістю найдовшого фільму цього ж формату
+# (можливі формати: 'movie', 'short', 'tvseries' etc)?
+def runtime_diff_within_title_type(title_basics_df):
+    window_spec = Window.partitionBy('title_type').orderBy(f.col('runtime_minutes').desc())
+    # create column with max runtime within each title_type
+    runtime_within_type_df = title_basics_df.withColumn('max_runtime_within_type',
+                                                        f.max(f.col('runtime_minutes')).over(window_spec))
+    # create column with difference between max runtime and runtime of movie within each title_type
+    runtime_within_type_df = runtime_within_type_df.withColumn('diff_runtime_within_type',
+                                                               f.col('max_runtime_within_type') - f.col('runtime_minutes'))
+    # select columns that we need
+    runtime_within_type_df = runtime_within_type_df.select('tconst', 'title_type','primary_title',
+                                                           'max_runtime_within_type', 'diff_runtime_within_type')
+    return runtime_within_type_df
+
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
     cols = df.columns
