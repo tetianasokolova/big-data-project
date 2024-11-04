@@ -81,3 +81,6 @@ write_df_to_csv(titles_with_german_or_swiss_region, TITLES_WITH_GERMAN_OR_SWISS_
 episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
 more_than_2_hours_long_films = questions_stoliaruk.more_than_2_hours_long_films(title_basics_df)
 children_friendly_films = questions_stoliaruk.children_friendly_films(title_basics_df)
+
+# grouping and window functions by Stoliaruk
+most_released_years = questions_stoliaruk.most_released_years(title_basics_df)
