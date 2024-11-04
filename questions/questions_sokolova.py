@@ -1,6 +1,7 @@
 import pyspark.sql.functions as f
 from pyspark.sql.window import Window
 
+# filtering questions
 # question 24: які унікальні ідентифікатори та рейтинги у фільмів, що мають більше як 10,000 голосів?
 def title_rating_with_votes_above_10000(title_rating_df):
     return (title_rating_df.filter(f.col('num_votes') > 10000)
@@ -69,6 +70,15 @@ def runtime_diff_within_title_type(title_basics_df):
     runtime_within_type_df = runtime_within_type_df.select('tconst', 'title_type','primary_title',
                                                            'max_runtime_within_type', 'diff_runtime_within_type')
     return runtime_within_type_df
+
+# question 34: який ранг за тривалістю фільму має кожен фільм у межах свого року випуску?
+def rank_by_runtime_within_start_year(title_basics_df):
+    window_spec = Window.partitionBy('start_year').orderBy(f.col('runtime_minutes').desc())
+    rank_by_runtime_df = title_basics_df.withColumn('rank_runtime_within_year',
+                                                    f.dense_rank().over(window_spec))
+    rank_by_runtime_df = rank_by_runtime_df.select('tconst','primary_title', 'start_year',
+                                                   'runtime_minutes', 'rank_runtime_within_year')
+    return rank_by_runtime_df
 
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
