@@ -3,7 +3,8 @@ from setting import AKAS_DF_PATH, AKAS_DF_RESULTS_PATH, TITLE_CREW_DF_PATH, TITL
 from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
                      NAME_BASICS_DF_PATH, NAME_BASICS_DF_RESULTS_PATH)
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
-                     TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH)
+                     TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH,
+                     QUESTION_8_PATH, QUESTION_35_PATH, QUESTION_36_PATH, QUESTION_37_PATH, QUESTION_38_PATH)
 from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH,
                      TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
                      THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
@@ -63,9 +64,9 @@ title_episode_df = cleaning_title_episode(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 
 # filtering questions by Mishchenia
-titles_with_rating_above_5 = questions_mishchenia.titles_with_rating_above_5(title_ratings_df)
-titles_with_ukrainian_translation = questions_mishchenia.titles_with_ukrainian_translation(akas_df)
-william_dickson_films = questions_mishchenia.william_dickson_films(title_crew_df)
+titles_with_rating_above_5=questions_mishchenia.titles_with_rating_above_5(title_ratings_df)
+titles_with_ukrainian_translation=questions_mishchenia.titles_with_ukrainian_translation(akas_df)
+william_dickson_films=questions_mishchenia.william_dickson_films(title_crew_df)
 
 # filtering questions by Sokolova
 title_rating_with_votes_above_10000 = (questions_sokolova
@@ -108,3 +109,19 @@ write_df_to_csv(runtime_diff_within_title_type, RUNTIME_DIFF_WITHIN_TITLE_TYPE_P
 
 rank_by_runtime_within_start_year = questions_sokolova.rank_by_runtime_within_start_year(title_basics_df)
 write_df_to_csv(rank_by_runtime_within_start_year, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH)
+
+# grouping and window functions by Stoliaruk
+most_released_years = questions_stoliaruk.most_released_years(title_basics_df)
+write_df_to_csv(most_released_years, QUESTION_8_PATH)
+
+genre_count_per_year = questions_stoliaruk.genre_count_per_year(title_basics_df)
+write_df_to_csv(genre_count_per_year, QUESTION_35_PATH)
+
+rating_count = questions_stoliaruk.rating_count(title_basics_df)
+write_df_to_csv(rating_count, QUESTION_36_PATH)
+
+average_movies_runtime_per_year = questions_stoliaruk.average_movies_runtime_per_year(title_basics_df)
+write_df_to_csv(average_movies_runtime_per_year, QUESTION_37_PATH)
+
+duration_stats_per_type = questions_stoliaruk.duration_stats_per_type(title_basics_df)
+write_df_to_csv(duration_stats_per_type, QUESTION_38_PATH)
