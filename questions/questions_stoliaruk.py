@@ -35,9 +35,20 @@ def rating_count(title_ratings_df):
 
 # 37. Яка середня тривалість фільмів кожного року?
 def average_movies_runtime_per_year(title_basics_df):
-    window_spec = Window.partitionBy(f.col("start_year")).orderBy(f.col("start_year").desc())
+    window_spec = Window.partitionBy(f.col("start_year")).orderBy(f.col("runtime_minutes").desc())
     movies_df = title_basics_df.filter((f.col('title_type') == 'movie') & (f.col("start_year").isNotNull()))
     average_runtime_df = movies_df.withColumn("average_runtime",
                                               f.round(f.avg("runtime_minutes").over(window_spec), 1)) \
         .select("start_year", "average_runtime")
     return average_runtime_df
+
+# 38. Яка мінімальна, максимальна та середня тривалість фільмів для кожного типу (titleType)?
+def duration_stats_per_type(title_basics_df):
+    window_spec = Window.partitionBy(f.col("title_type")).orderBy(f.col("title_type"))
+    duration_stats_df = title_basics_df \
+        .withColumn("min_runtime", f.min("runtime_minutes").over(window_spec)) \
+        .withColumn("max_runtime", f.max("runtime_minutes").over(window_spec)) \
+        .withColumn("average_runtime", f.round(f.avg("runtime_minutes").over(window_spec), 1)) \
+        .select("title_type", "min_runtime", "max_runtime", "average_runtime") \
+        .distinct()
+    return duration_stats_df

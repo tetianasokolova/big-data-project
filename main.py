@@ -3,7 +3,8 @@ from setting import AKAS_DF_PATH, AKAS_DF_RESULTS_PATH, TITLE_CREW_DF_PATH, TITL
 from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
                      NAME_BASICS_DF_PATH, NAME_BASICS_DF_RESULTS_PATH)
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
-                     TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH)
+                     TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH,
+                     QUESTION_8_PATH, QUESTION_35_PATH, QUESTION_36_PATH, QUESTION_37_PATH, QUESTION_38_PATH)
 from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH,
                      TITLES_WITH_GERMAN_OR_SWISS_REGION)
 from my_io import read_akas_df, write_akas_df_to_csv, read_title_crew_df, write_title_crew_df_to_csv, \
@@ -84,7 +85,16 @@ children_friendly_films = questions_stoliaruk.children_friendly_films(title_basi
 
 # grouping and window functions by Stoliaruk
 most_released_years = questions_stoliaruk.most_released_years(title_basics_df)
+write_df_to_csv(most_released_years, QUESTION_8_PATH)
+
 genre_count_per_year = questions_stoliaruk.genre_count_per_year(title_basics_df)
+write_df_to_csv(genre_count_per_year, QUESTION_35_PATH)
+
 rating_count = questions_stoliaruk.rating_count(title_basics_df)
+write_df_to_csv(rating_count, QUESTION_36_PATH)
 
 average_movies_runtime_per_year = questions_stoliaruk.average_movies_runtime_per_year(title_basics_df)
+write_df_to_csv(average_movies_runtime_per_year, QUESTION_37_PATH)
+
+duration_stats_per_type = questions_stoliaruk.duration_stats_per_type(title_basics_df)
+write_df_to_csv(duration_stats_per_type, QUESTION_38_PATH)
