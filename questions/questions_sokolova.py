@@ -1,4 +1,5 @@
 import pyspark.sql.functions as f
+from pyspark.sql.window import Window
 
 # question 24: які унікальні ідентифікатори та рейтинги у фільмів, що мають більше як 10,000 голосів?
 def title_rating_with_votes_above_10000(title_rating_df):
@@ -40,13 +41,16 @@ def three_popular_professions(name_basics_df):
     return three_popular_professions_df
 
 # question 16: хто з режисерів працював над найбільшою кількістю фільмів?
-def top_director_by_film_count(title_crew_df):
+def top_director_by_film_count(title_crew_df, name_basics_df):
     count_films_per_director = (title_crew_df.groupBy('directors')
                                              .count()
                                              .orderBy('count', ascending=False))
-    top_director_by_film_count_df = (count_films_per_director.select(f.col('directors'))
+    top_director_by_film_count_df = (count_films_per_director.select('directors')
                                                              .filter(f.col('directors').isNotNull())
                                                              .limit(1))
+    join_cond = (top_director_by_film_count_df['directors'] == name_basics_df['nconst'])
+    top_director_by_film_count_df = (top_director_by_film_count_df.join(name_basics_df, on=join_cond, how='inner')
+                                                                  .select('nconst', 'primary_name'))
     return top_director_by_film_count_df
 
 # return number of null values for each column (it was used for cleaning)
