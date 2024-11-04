@@ -24,3 +24,10 @@ def genre_count_per_year(title_basics_df):
         .groupBy("start_year", "genres") \
         .count() \
         .orderBy("start_year", ascending=False)
+
+# 36. Скільки фільмів мають кожен цілий рейтинг?
+def rating_count(title_ratings_df):
+  title_ratings_df = title_ratings_df.withColumn("average_rating", f.round(f.col("average_rating")).cast("integer"))
+  return title_ratings_df.groupBy("average_rating") \
+      .count() \
+      .orderBy("average_rating")
