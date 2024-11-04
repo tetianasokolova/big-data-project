@@ -5,7 +5,8 @@ from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
                      TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH)
 from setting import (COUNT_MOVIES_PER_YEAR_PATH, THREE_POPULAR_PROFESSIONS_PATH,
-                     TOP_DIRECTOR_BY_FILM_COUNT_PATH)
+                     TOP_DIRECTOR_BY_FILM_COUNT_PATH, RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH,
+                     RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH)
 from my_io import read_akas_df, write_akas_df_to_csv, read_title_crew_df, write_title_crew_df_to_csv, \
     read_title_ratings_df, write_title_ratings_df_to_csv
 from my_io import (read_title_principals_df, write_title_principals_df_to_csv,
@@ -58,12 +59,19 @@ title_episode_df = title_episode_postprocess(title_episode_df)
 title_episode_df = cleaning_title_episode(title_episode_df)
 write_title_episode_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 
-# aggregation, grouping and sorting questions
+# grouping functions by Sokolova
 count_movies_per_year = questions_sokolova.count_movies_per_year(title_basics_df)
 write_df_to_csv(count_movies_per_year, COUNT_MOVIES_PER_YEAR_PATH)
 
 three_popular_professions = questions_sokolova.three_popular_professions(name_basics_df)
 write_df_to_csv(three_popular_professions, THREE_POPULAR_PROFESSIONS_PATH)
 
-top_director_by_film_count = questions_sokolova.top_director_by_film_count(title_crew_df)
+top_director_by_film_count = questions_sokolova.top_director_by_film_count(title_crew_df, name_basics_df)
 write_df_to_csv(top_director_by_film_count, TOP_DIRECTOR_BY_FILM_COUNT_PATH)
+
+# window functions by Sokolova
+runtime_diff_within_title_type = questions_sokolova.runtime_diff_within_title_type(title_basics_df)
+write_df_to_csv(runtime_diff_within_title_type, RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH)
+
+rank_by_runtime_within_start_year = questions_sokolova.rank_by_runtime_within_start_year(title_basics_df)
+write_df_to_csv(rank_by_runtime_within_start_year, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH)
