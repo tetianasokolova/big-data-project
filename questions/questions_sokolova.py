@@ -80,6 +80,15 @@ def rank_by_runtime_within_start_year(title_basics_df):
                                                    'runtime_minutes', 'rank_runtime_within_year')
     return rank_by_runtime_df
 
+# joining questions
+# question 6: у які роки були випущені 5 фільмів, що мають найбільшу кількість голосів, та які їхні назви?
+def top_five_movies_start_years(title_basics_df, title_ratings_df):
+    top_five_movies = title_ratings_df.orderBy('num_votes', ascending=False).limit(5)
+    joined_df = (title_basics_df.join(top_five_movies, on='tconst', how='inner')
+                                .select('tconst', 'primary_title', 'start_year', 'num_votes')
+                                .orderBy('num_votes', ascending=False))
+    return joined_df
+
 # return number of null values for each column (it was used for cleaning)
 def null_values_count(df):
     cols = df.columns
