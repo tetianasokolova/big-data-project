@@ -81,12 +81,40 @@ def rank_by_runtime_within_start_year(title_basics_df):
     return rank_by_runtime_df
 
 # joining questions
+# with inner join
 # question 6: у які роки були випущені 5 фільмів, що мають найбільшу кількість голосів, та які їхні назви?
 def top_five_movies_start_years(title_basics_df, title_ratings_df):
     top_five_movies = title_ratings_df.orderBy('num_votes', ascending=False).limit(5)
     joined_df = (title_basics_df.join(top_five_movies, on='tconst', how='inner')
                                 .select('tconst', 'primary_title', 'start_year', 'num_votes')
                                 .orderBy('num_votes', ascending=False))
+    return joined_df
+
+# with left join
+# question 39: скільки серіалів режисирував кожен режисер?
+def tv_series_per_director_count(name_basics_df, title_basics_df, title_crew_df):
+    # select directors ids and names
+    directors_df = (name_basics_df.withColumn('primary_profession',
+                                                   f.explode(f.col('primary_profession')))
+                                  .filter(f.col('primary_profession')=='director')
+                                  .select('nconst', 'primary_name'))
+    # select tv series
+    tv_series_df = title_basics_df.filter(f.col('title_type') == 'tvSeries')
+    exploded_title_directors = (title_crew_df.withColumn('director_id',
+                                                         f.explode(f.split(f.col('directors'), ',')))
+                                             .select('tconst', 'director_id'))
+    # count tv series number per director
+    tv_series_directors = (tv_series_df.join(exploded_title_directors, on='tconst', how='inner')
+                                       .dropDuplicates().select('director_id', 'tconst')
+                                       .groupBy('director_id').agg(f.count('tconst').alias('tv_series_count')))
+    # join with directors_df to get directors names
+    join_cond = (directors_df['nconst'] == tv_series_directors['director_id'])
+    joined_df = (directors_df.join(tv_series_directors, on=join_cond, how='left')
+                             .withColumn('tv_series_count',
+                                         f.when(f.col('tv_series_count').isNull(), f.lit(0))
+                                          .otherwise(f.col('tv_series_count')))
+                             .select('nconst', 'primary_name', 'tv_series_count')
+                             .orderBy('tv_series_count', ascending=False))
     return joined_df
 
 # return number of null values for each column (it was used for cleaning)
