@@ -9,7 +9,8 @@ from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIM
                      TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
                      THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
                      RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH,
-                     TOP_FIVE_MOVIES_START_YEARS_PATH, TV_SERIES_PER_DIRECTOR_COUNT_PATH)
+                     TOP_FIVE_MOVIES_START_YEARS_PATH, TV_SERIES_PER_DIRECTOR_COUNT_PATH, BEST_10_FILM_ORIGINAL_NAME_PATH,
+                     RELATION_EPISODE_AMOUNT_AND_RATING_PATH)
 from my_io import read_akas_df, write_akas_df_to_csv, read_title_crew_df, write_title_crew_df_to_csv, \
     read_title_ratings_df, write_title_ratings_df_to_csv
 from my_io import (read_title_principals_df, write_title_principals_df_to_csv,
@@ -30,6 +31,8 @@ from dfs_postprocess.title_episode_cleaning import cleaning_title_episode
 from questions import questions_mishchenia
 from questions import questions_sokolova
 from questions import questions_stoliaruk
+
+import pyspark.sql.functions as f
 
 # dataframes processing
 akas_df = read_akas_df(AKAS_DF_PATH)
@@ -57,6 +60,7 @@ write_name_basics_df_to_csv(name_basics_df, NAME_BASICS_DF_RESULTS_PATH)
 title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
 title_basics_df = title_basics_postprocess(title_basics_df)
 title_basics_df = cleaning_title_basics_df(title_basics_df)
+
 write_title_basics_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 
 title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
@@ -133,3 +137,10 @@ write_df_to_csv(top_five_movies_start_years, TOP_FIVE_MOVIES_START_YEARS_PATH)
 
 tv_series_per_director_count = questions_sokolova.tv_series_per_director_count(name_basics_df, title_basics_df, title_crew_df)
 write_df_to_csv(tv_series_per_director_count, TV_SERIES_PER_DIRECTOR_COUNT_PATH)
+
+# joining questions by Mishchenia
+best_10_film_original_name = questions_mishchenia.best_10_film_original_name(title_basics_df,title_ratings_df)
+write_df_to_csv(best_10_film_original_name, BEST_10_FILM_ORIGINAL_NAME_PATH)
+
+relation_episodes_amount_and_rating=questions_mishchenia.relation_episodes_amount_and_rating(title_episode_df,title_ratings_df)
+write_df_to_csv(relation_episodes_amount_and_rating, RELATION_EPISODE_AMOUNT_AND_RATING_PATH)

@@ -63,3 +63,19 @@ def top_5_longest_movies_by_genre(title_basics_df):
     ranked_movies = filtered_movies.withColumn("row_number", f.row_number().over(window))
 
     return ranked_movies.filter(f.col("row_number") <= 5)
+
+#40 Оригінальні назви 10 фільмів(не серіалу), які мають найвищий рейтинг і хоча б 100 голосів
+def best_10_film_original_name(title_basic_df, title_ratings_df):
+    movies= title_basic_df.filter((f.col('title_type')=='movie')).select(['tconst','original_title'])
+    best_movie=(movies.join(title_ratings_df,on='tconst',how='left').filter(f.col('num_votes')>=100).
+                orderBy('average_rating',ascending=False).limit(10))
+    return best_movie
+
+#20 Чи є зв'язок між кількістю епізодів у серіалі та його середнім рейтингом?
+def relation_episodes_amount_and_rating(title_episode_df,title_ratings_df ):
+    episodes_amount=title_episode_df.select(['tconst','parent_tconst',]).groupBy('parent_tconst').count()
+    join_condition=(episodes_amount['parent_tconst']==title_ratings_df['tconst'])
+
+    exploded_episodes_amount=episodes_amount.join(title_ratings_df,on=join_condition,how='inner')
+    return exploded_episodes_amount.groupBy('count').agg({'average_rating':'avg'}).orderBy('count')
+
