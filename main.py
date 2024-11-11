@@ -123,7 +123,7 @@ write_df_to_csv(most_released_years, QUESTION_8_PATH)
 genre_count_per_year = questions_stoliaruk.genre_count_per_year(title_basics_df)
 write_df_to_csv(genre_count_per_year, QUESTION_35_PATH)
 
-rating_count = questions_stoliaruk.rating_count(title_basics_df)
+rating_count = questions_stoliaruk.rating_count(title_ratings_df)
 write_df_to_csv(rating_count, QUESTION_36_PATH)
 
 average_movies_runtime_per_year = questions_stoliaruk.average_movies_runtime_per_year(title_basics_df)
