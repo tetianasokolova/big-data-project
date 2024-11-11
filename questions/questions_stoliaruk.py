@@ -21,8 +21,9 @@ def most_released_years(title_basics_df):
 
 # 35. Скільки фільмів (чи інших типів) кожного жанру випускались кожного року?
 def genre_count_per_year(title_basics_df):
-    return title_basics_df.filter((f.col("start_year").isNotNull()) & (f.col("genres").isNotNull()))\
-        .groupBy("start_year", "genres") \
+    genres_df = title_basics_df.withColumn("genre", f.explode(f.split(f.col("genres"), ",")))
+    return genres_df.filter((f.col("start_year").isNotNull()) & (f.col("genre").isNotNull()))\
+        .groupBy("start_year", "genre") \
         .count() \
         .orderBy("start_year", ascending=False)
 
@@ -55,13 +56,15 @@ def duration_stats_per_type(title_basics_df):
 
 # 41. Який відсоток фільмів кожного року мають найвищий рейтинг (10)?
 def highest_rating_per_year(title_basics_df, title_ratings_df):
-    merged_df = title_basics_df.join(title_ratings_df, title_basics_df.tconst == title_ratings_df.tconst)\
+    merged_df = title_basics_df.join(title_ratings_df, title_basics_df.tconst == title_ratings_df.tconst, "right")\
           .select("start_year", "average_rating") \
           .filter(f.col("start_year").isNotNull())
     movies_count_df = merged_df.groupBy("start_year").agg(f.count("*").alias("total_movies"),
-                                                          f.count(f.when(f.col("average_rating") == 10, True)).alias("movies_with_rating_10"))
+                                                          f.count(f.when(f.col("average_rating") == 10, True))\
+                                                          .alias("movies_with_rating_10"))
     percentage_df = movies_count_df.withColumn("percentage_with_rating_10",
-                                               f.round((f.col("movies_with_rating_10") / f.col("total_movies")) * 100, 2)).orderBy(f.col("start_year").desc())
+                                               f.round((f.col("movies_with_rating_10") / f.col("total_movies")) * 100,
+                                                       2)).orderBy(f.col("start_year").desc())
     return percentage_df
 
 # 42. Який середній рейтинг для кожного жанру?
