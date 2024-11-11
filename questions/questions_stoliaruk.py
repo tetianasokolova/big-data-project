@@ -63,3 +63,14 @@ def highest_rating_per_year(title_basics_df, title_ratings_df):
     percentage_df = movies_count_df.withColumn("percentage_with_rating_10",
                                                f.round((f.col("movies_with_rating_10") / f.col("total_movies")) * 100, 2)).orderBy(f.col("start_year").desc())
     return percentage_df
+
+# 42. Який середній рейтинг для кожного жанру?
+def avg_rating_per_genre(title_basics_df, title_ratings_df):
+    merged_df = title_basics_df.join(title_ratings_df, title_basics_df.tconst == title_ratings_df.tconst) \
+                     .select("genres", "average_rating") \
+                     .filter(f.col("genres").isNotNull())
+    genres_df = merged_df.withColumn("genre", f.explode(f.split(f.col("genres"), ",")))
+    average_rating_per_genre_df = genres_df.groupBy("genre") \
+        .agg(f.round(f.avg("average_rating"), 2).alias("avg_rating")) \
+        .orderBy(f.col("avg_rating").desc())
+    return average_rating_per_genre_df

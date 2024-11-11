@@ -5,7 +5,7 @@ from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
                      TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH,
                      QUESTION_8_PATH, QUESTION_35_PATH, QUESTION_36_PATH, QUESTION_37_PATH, QUESTION_38_PATH,
-                     HIGHEST_RATING_PER_YEAR)
+                     HIGHEST_RATING_PER_YEAR, AVG_RATING_PER_GENRE)
 from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH,
                      TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
                      THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
@@ -149,3 +149,6 @@ write_df_to_csv(relation_episodes_amount_and_rating, RELATION_EPISODE_AMOUNT_AND
 # joining questions by Stoliaruk
 highest_rating_per_year = questions_stoliaruk.highest_rating_per_year(title_basics_df, title_ratings_df)
 write_df_to_csv(highest_rating_per_year, HIGHEST_RATING_PER_YEAR)
+
+avg_rating_per_genre = questions_stoliaruk.avg_rating_per_genre(title_basics_df, title_ratings_df)
+write_df_to_csv(avg_rating_per_genre, AVG_RATING_PER_GENRE)
