@@ -65,7 +65,7 @@ def top_5_longest_movies_by_genre(title_basics_df):
     return ranked_movies.filter(f.col("row_number") <= 5)
 
 #40 Оригінальні назви 10 фільмів(не серіалу), які мають найвищий рейтинг і хоча б 100 голосів
-def best_10_film_original_name(title_basic_df, title_ratings_df):
+def best_film_original_name(title_basic_df, title_ratings_df):
     movies= title_basic_df.filter((f.col('title_type')=='movie')).select(['tconst','original_title'])
     best_movie=(movies.join(title_ratings_df,on='tconst',how='left').filter(f.col('num_votes')>=100).
                 orderBy('average_rating',ascending=False).limit(10))

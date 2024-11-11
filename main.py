@@ -10,7 +10,7 @@ from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIM
                      TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
                      THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
                      RUNTIME_DIFF_WITHIN_TITLE_TYPE_PATH, RANK_BY_RUNTIME_WITHIN_START_YEAR_PATH,
-                     TOP_FIVE_MOVIES_START_YEARS_PATH, TV_SERIES_PER_DIRECTOR_COUNT_PATH, BEST_10_FILM_ORIGINAL_NAME_PATH,
+                     TOP_FIVE_MOVIES_START_YEARS_PATH, TV_SERIES_PER_DIRECTOR_COUNT_PATH, BEST_FILM_ORIGINAL_NAME_PATH,
                      RELATION_EPISODE_AMOUNT_AND_RATING_PATH)
 from my_io import read_akas_df, write_akas_df_to_csv, read_title_crew_df, write_title_crew_df_to_csv, \
     read_title_ratings_df, write_title_ratings_df_to_csv
@@ -140,8 +140,8 @@ tv_series_per_director_count = questions_sokolova.tv_series_per_director_count(n
 write_df_to_csv(tv_series_per_director_count, TV_SERIES_PER_DIRECTOR_COUNT_PATH)
 
 # joining questions by Mishchenia
-best_10_film_original_name = questions_mishchenia.best_10_film_original_name(title_basics_df,title_ratings_df)
-write_df_to_csv(best_10_film_original_name, BEST_10_FILM_ORIGINAL_NAME_PATH)
+best_film_original_name = questions_mishchenia.best_film_original_name(title_basics_df,title_ratings_df)
+write_df_to_csv(best_film_original_name, BEST_FILM_ORIGINAL_NAME_PATH)
 
 relation_episodes_amount_and_rating=questions_mishchenia.relation_episodes_amount_and_rating(title_episode_df,title_ratings_df)
 write_df_to_csv(relation_episodes_amount_and_rating, RELATION_EPISODE_AMOUNT_AND_RATING_PATH)
