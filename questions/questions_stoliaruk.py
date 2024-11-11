@@ -6,7 +6,7 @@ def episodes_of_twin_peaks_1990(title_episode_df):
     return title_episode_df.filter(f.col("parent_tconst") == 'tt0098936').count()
 
 # 28. Які фільми тривають більше двох годин?
-def more_than_2_hours_long_films(title_basics_df):
+def more_than_two_hours_long_films(title_basics_df):
     return title_basics_df.filter(f.col('runtime_minutes')>120)
 
 # 29. Які фільми дозволено дивитись дітям?
@@ -52,3 +52,14 @@ def duration_stats_per_type(title_basics_df):
         .select("title_type", "min_runtime", "max_runtime", "average_runtime") \
         .distinct()
     return duration_stats_df
+
+# 41. Який відсоток фільмів кожного року мають найвищий рейтинг (10)?
+def highest_rating_per_year(title_basics_df, title_ratings_df):
+    merged_df = title_basics_df.join(title_ratings_df, title_basics_df.tconst == title_ratings_df.tconst)\
+          .select("start_year", "average_rating") \
+          .filter(f.col("start_year").isNotNull())
+    movies_count_df = merged_df.groupBy("start_year").agg(f.count("*").alias("total_movies"),
+                                                          f.count(f.when(f.col("average_rating") == 10, True)).alias("movies_with_rating_10"))
+    percentage_df = movies_count_df.withColumn("percentage_with_rating_10",
+                                               f.round((f.col("movies_with_rating_10") / f.col("total_movies")) * 100, 2)).orderBy(f.col("start_year").desc())
+    return percentage_df

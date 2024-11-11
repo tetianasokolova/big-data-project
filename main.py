@@ -4,7 +4,8 @@ from setting import (TITLE_PRINCIPALS_DF_PATH, TITLE_PRINCIPALS_RESULTS_PATH,
                      NAME_BASICS_DF_PATH, NAME_BASICS_DF_RESULTS_PATH)
 from setting import (TITLE_BASICS_DF_PATH, TITLE_BASICS_DF_CSV_PATH,
                      TITLE_EPISODE_DF_PATH, TITLE_EPISODE_DF_CSV_PATH,
-                     QUESTION_8_PATH, QUESTION_35_PATH, QUESTION_36_PATH, QUESTION_37_PATH, QUESTION_38_PATH)
+                     QUESTION_8_PATH, QUESTION_35_PATH, QUESTION_36_PATH, QUESTION_37_PATH, QUESTION_38_PATH,
+                     HIGHEST_RATING_PER_YEAR)
 from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIMARY_PROFESSION_PATH,
                      TITLES_WITH_GERMAN_OR_SWISS_REGION_PATH, COUNT_MOVIES_PER_YEAR_PATH,
                      THREE_POPULAR_PROFESSIONS_PATH, TOP_DIRECTOR_BY_FILM_COUNT_PATH,
@@ -86,7 +87,7 @@ write_df_to_csv(titles_with_german_or_swiss_region, TITLES_WITH_GERMAN_OR_SWISS_
 
 # filtering questions by Stoliaruk
 episodes_of_twin_peaks_1990 = questions_stoliaruk.episodes_of_twin_peaks_1990(title_episode_df)
-more_than_2_hours_long_films = questions_stoliaruk.more_than_2_hours_long_films(title_basics_df)
+more_than_2_hours_long_films = questions_stoliaruk.more_than_two_hours_long_films(title_basics_df)
 children_friendly_films = questions_stoliaruk.children_friendly_films(title_basics_df)
 
 # grouping and window functions by Mishchenia
@@ -144,3 +145,7 @@ write_df_to_csv(best_10_film_original_name, BEST_10_FILM_ORIGINAL_NAME_PATH)
 
 relation_episodes_amount_and_rating=questions_mishchenia.relation_episodes_amount_and_rating(title_episode_df,title_ratings_df)
 write_df_to_csv(relation_episodes_amount_and_rating, RELATION_EPISODE_AMOUNT_AND_RATING_PATH)
+
+# joining questions by Stoliaruk
+highest_rating_per_year = questions_stoliaruk.highest_rating_per_year(title_basics_df, title_ratings_df)
+write_df_to_csv(highest_rating_per_year, HIGHEST_RATING_PER_YEAR)
