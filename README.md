@@ -1,7 +1,10 @@
-# big-data-project
-Tetiana Sokolova
-Volodymyr Mishchenia
-Yuliia Stoliaruk
+# Big Data Project
+
+## Project Overview
+
+This project analyzes IMDb data using PySpark, covering movies, TV shows, people, ratings, and more by combining multiple IMDb datasets. The goal is to answer important business questions about industry trends, ratings, genres, and professionals through large-scale data analysis.
+
+---
 
 ## Business Questions for the Data
 
@@ -44,3 +47,34 @@ Yuliia Stoliaruk
 37. What is the average duration of movies for each year?  
 38. What are the minimum, maximum, and average durations of movies for each title type?  
 39. How many TV series has each director directed?
+
+---
+
+## Data Sources and Licensing
+
+This project utilizes multiple datasets from IMDb’s official non-commercial data repository, available at [https://datasets.imdbws.com/](https://datasets.imdbws.com/). These datasets are updated regularly and provided as gzipped TSV files containing detailed information about movies, TV shows, people, ratings, and more.
+
+Please note the following:
+
+- The IMDb datasets are used strictly for **personal, educational, and non-commercial use** only.
+- This repository does **not include the raw IMDb data files**.
+- All use of IMDb data complies with IMDb’s [Non-Commercial Licensing Terms](https://www.imdb.com/interfaces/) and copyright policies.
+
+By including this information, the project acknowledges the data source and its licensing requirements, ensuring transparent and responsible use of IMDb data.
+
+---
+
+## Authors
+
+- Tetiana Sokolova (tanya.sokolova1406@gmail.com)
+- Volodymyr Mishchenia 
+- Yuliia Stoliaruk
+
+---
+
+## Acknowledgments
+
+Information courtesy of  
+**IMDb**  
+(https://www.imdb.com).  
+Used with permission.
