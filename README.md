@@ -3,9 +3,6 @@ Tetiana Sokolova
 Volodymyr Mishchenia
 Yuliia Stoliaruk
 
-## Бізнес-питання до даних
-## Business Questions for the Data
-
 ## Business Questions for the Data
 
 1. Which actors have starred in the greatest number of movies or TV shows?  
