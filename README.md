@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project analyzes IMDb data using PySpark, covering movies, TV shows, people, ratings, and more by combining multiple IMDb datasets. The goal is to answer important business questions about industry trends, ratings, genres, and professionals through large-scale data analysis.
+This project analyzes IMDb data using **PySpark**, covering movies, TV shows, people, ratings, and more by combining multiple IMDb datasets. The goal is to answer important business questions about industry trends, ratings, genres, and professionals through large-scale data analysis.
 
 ---
 
