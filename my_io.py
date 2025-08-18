@@ -155,33 +155,5 @@ def read_title_episode_df(path):
                                                                  schema=title_episode_df_schema)
     return title_episode_df
 
-
-def write_title_ratings_df_to_csv(df,path):
-    df.write.csv(path,header=True,mode='overwrite',encoding='utf-8',sep=',')
-
-
-def write_title_crew_df_to_csv(df, path):
-    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
-
-
-def write_akas_df_to_csv(df, path):
-    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
-
-# write title_principals_df
-def write_title_principals_df_to_csv(df, path):
-    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
-
-# write name_basics_df
-def write_name_basics_df_to_csv(df, path):
-    df.write.csv(path, header=True, mode='overwrite', encoding='utf-8', sep=',')
-
-
-def write_title_basics_df_to_csv(df, path):
-    df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
-
-
-def write_title_episode_df_to_csv(df, path):
-    df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
-
 def write_df_to_csv(df, path):
     df.write.csv(path, sep=',', header=True, nullValue='null', mode='overwrite')
