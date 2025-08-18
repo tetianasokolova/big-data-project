@@ -1,47 +1,80 @@
-# big-data-project
-Міщеня Володимир (група 4)  
-Соколова Тетяна (група 3)  
-Столярук Юлія (група 3)   
-## Бізнес-питання до даних
-1. Які актори знімалися в найбільшій кількості фільмів чи серіалів?  
-2. Які 5 жанрів найпопулярніші за кількістю фільмів в жанрах?
-3. Скільки фільмів було випущено в кожен рік випуску?
-4. Які три основні професії є найпоширенішими серед всіх осіб у базі?
-5. Який фільм або серіал має найбільше голосів?
-6. У які роки були випущені 5 фільмів, що мають найбільшу кількість голосів, та які їхні назви?
-7. Скільки людей поєднують професії "актор" та "режисер"?
-8. Коли випускали найбільше фільмів?
-9. Які регіони випускають найбільше фільмів та серіалів?
-10. Як змінюється кількість фільмів певного регіону з часом?
-11. Чи є зв’язок між кількістю жанрів, в яких працює режисер, та рейтингом його фільмів?
-12. Які регіони мають найбільше іноземних (не оригінальних) назв?
-13. Фільми з яких регіонів мають найбільший рейтинг? 
-14. Чи існує кореляція між тривалістю фільму та його рейтингом?
-15. Які жанри мають найвищі рейтинги?
-16. Хто з режисерів працював над найбільшою кількістю фільмів?
-17. Фільми якого жанру мають найдовшу тривалість?
-18. Які фільми мають найвищі рейтинги?
-19. Як змінюється кількість фільмів певного жанру з часом?
-20. Чи є зв'язок між кількістю епізодів у серіалі та його середнім рейтингом?
-21. Скільки фільмів мають cередній рейтинг більше 5?
-22. Скільки фільмів перекладено українською мовою?
-23. Cкільки фільмів William K.L. Dickson(nm0005690) режисерував?
-24. Які унікальні ідентифікатори та рейтинги у фільмів, що мають більше ніж 10,000 голосів?
-25. Які основні професії Raquel Welch (nm0000079)?
-26. Які унікальні ідентифікатори та локальні назви для фільмів з регіону 'DE' (Німеччина) або 'CH' (Швейцарія)?
-27. Скільки епізодів у серіалі "Twin Peaks" 1990 року?
-28. Які фільми тривають більше двох годин?
-29. Які фільми дозволено дивитись дітям? 
-30. В якому регіоні найбільше перекладених філмів (окрім оригінальних)?
-31. Які фільми з високим середнім рейтингом (понад 8.0) мають найбільшу кількість голосів і займають топ-10 місць за кількістю голосів?
-32. Які п'ять фільмів у кожному жанрі мають найвищу тривалість?
-33. Яка тривалість найдовшого фільму для кожного формату та яка різниця між тривалістю кожного фільму та тривалістю найдовшого фільму цього ж формату (можливі формати: 'movie', 'short', 'tvseries' etc)?
-34. Який ранг за тривалістю фільму має кожен фільм у межах свого року випуску?
-35. Скільки фільмів (чи інших типів) кожного жанру випускались кожного року?
-36. Скільки фільмів мають кожен цілий рейтинг?
-37. Яка середня тривалість фільмів кожного року?
-38. Яка мінімальна, максимальна та середня тривалість фільмів для кожного типу (titleType)?
-39. Скільки серіалів режисирував кожен режисер?
-40. Оригінальні назви 10 фільмів(не серіалу), які мають найвищий рейтинг і хоча б 100 голосів
-41. Який відсоток фільмів кожного року мають найвищий рейтинг (10)?
-42. Який середній рейтинг для кожного жанру?
+# Big Data Project
+
+## Project Overview
+
+This project analyzes IMDb data using **PySpark**, covering movies, TV shows, people, ratings, and more by combining multiple IMDb datasets. The goal is to answer important business questions about industry trends, ratings, genres, and professionals through large-scale data analysis.
+
+---
+
+## Business Questions for the Data
+
+1. Which actors have starred in the greatest number of movies or TV shows?  
+2. What are the 5 most popular genres by the number of movies in each genre?  
+3. How many movies were released in each release year?  
+4. What are the three main professions most common among all people in the database?  
+5. Which movie or TV show has the highest number of votes?  
+6. In which years were the 5 movies with the highest number of votes released, and what are their titles?  
+7. How many people combine the professions of "actor" and "director"?  
+8. When was the highest number of movies released?  
+9. Which regions produce the most movies and TV shows?  
+10. How does the number of movies from a certain region change over time?  
+11. Is there a connection between the number of genres a director works in and the ratings of their movies?  
+12. Which regions have the most foreign (non-original) titles?  
+13. Movies from which regions have the highest ratings?  
+14. Is there a correlation between the length of a movie and its rating?  
+15. Which genres have the highest ratings?  
+16. Which director has worked on the greatest number of movies?  
+17. Movies of which genre have the longest duration?  
+18. Which movies have the highest ratings?  
+19. How does the number of movies in a certain genre change over time?  
+20. Is there a connection between the number of episodes in a TV series and its average rating?  
+21. How many movies have an average rating above 5?  
+22. How many movies have been translated into Ukrainian?  
+23. How many movies has William K.L. Dickson (nm0005690) directed?  
+24. What are the unique IDs and ratings of movies with more than 10,000 votes?  
+25. What are the main professions of Raquel Welch (nm0000079)?  
+26. What are the unique IDs and local titles for movies from the regions 'DE' (Germany) or 'CH' (Switzerland)?  
+27. How many episodes are there in the 1990 TV series "Twin Peaks"?  
+28. Which movies are longer than two hours?  
+29. Which movies are permitted for children to watch?  
+30. In which region are there the most translated (non-original) movies?  
+31. Which movies with a high average rating (over 8.0) have the largest number of votes and rank in the top 10 by vote count?  
+32. What are the top five longest movies in each genre?  
+33. What is the duration of the longest movie for each format, and what is the difference in duration between each movie and the longest movie in the same format (possible formats: 'movie', 'short', 'tvseries', etc.)?  
+34. What is the rank by movie duration for each movie within its release year?  
+35. How many movies (or other types) of each genre were released each year?  
+36. How many movies have each whole-number rating?  
+37. What is the average duration of movies for each year?  
+38. What are the minimum, maximum, and average durations of movies for each title type?  
+39. How many TV series has each director directed?
+
+---
+
+## Data Sources and Licensing
+
+This project utilizes multiple datasets from IMDb’s official non-commercial data repository, available at [https://datasets.imdbws.com/](https://datasets.imdbws.com/). These datasets are updated regularly and provided as gzipped TSV files containing detailed information about movies, TV shows, people, ratings, and more.
+
+Please note the following:
+
+- The IMDb datasets are used strictly for **personal, educational, and non-commercial use** only.
+- This repository does **not include the raw IMDb data files**.
+- All use of IMDb data complies with IMDb’s [Non-Commercial Licensing Terms](https://www.imdb.com/interfaces/) and copyright policies.
+
+By including this information, the project acknowledges the data source and its licensing requirements, ensuring transparent and responsible use of IMDb data.
+
+---
+
+## Authors
+
+- Tetiana Sokolova (tanya.sokolova1406@gmail.com)
+- Volodymyr Mishchenia 
+- Yuliia Stoliaruk
+
+---
+
+## Acknowledgments
+
+Information courtesy of  
+**IMDb**  
+(https://www.imdb.com).  
+Used with permission.
