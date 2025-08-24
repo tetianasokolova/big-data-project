@@ -5,6 +5,17 @@
 This project analyzes IMDb data using **PySpark**, covering movies, TV shows, people, ratings, and more by combining multiple IMDb datasets. The goal is to answer important business questions about industry trends, ratings, genres, and professionals through large-scale data analysis.
 
 ---
+## Data Cleaning and Preprocessing
+
+Before analysis, all datasets were cleaned and preprocessed to ensure consistency and reliability. The following strategies were applied:
+
+- Replaced placeholder values such as `\N` (used to represent missing data) with proper `null` values.
+- Removed rows with excessive missing data when they could not be reliably filled.
+- Applied missing value handling techniques, using the **mode** for categorical fields and the **median** for numerical fields.
+
+These steps helped standardize the datasets and minimize noise in the analysis.
+
+---
 
 ## Business Questions for the Data
 
@@ -47,6 +58,20 @@ This project analyzes IMDb data using **PySpark**, covering movies, TV shows, pe
 37. What is the average duration of movies for each year?  
 38. What are the minimum, maximum, and average durations of movies for each title type?  
 39. How many TV series has each director directed?
+
+---
+
+## Business Questions Answered
+
+The analysis addressed a range of questions, including:
+
+- Movie and TV show counts by actor, genre, region, and release year  
+- Ratings, vote counts, and durations for movies and TV shows  
+- Key professions and activities of people in the database  
+- Top titles by length, votes, or ratings, including filtering by specific criteria  
+- Episode counts and formats for TV series  
+
+Specifically, questions numbered 3, 4, 6, 8, 16, 17, 24–33, and 35–39 were analyzed.
 
 ---
 
