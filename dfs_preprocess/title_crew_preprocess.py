@@ -23,7 +23,7 @@ def drop_two_nulls_rows(title_crew_df):
     return title_crew_df.filter(~((f.col('writers').isNull()) & (f.col('directors').isNull())))
 
 
-def title_crew_postprocess(title_crew_df):
+def title_crew_preprocess(title_crew_df):
     title_crew_df = split_directors_column(title_crew_df)
     title_crew_df = split_writers_column(title_crew_df)
     title_crew_df = change_n_to_none(title_crew_df)

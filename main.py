@@ -12,49 +12,49 @@ from setting import (TITLE_RATING_WITH_VOTES_ABOVE_10000_PATH, RAQUEL_WELCH_PRIM
 from my_io import (read_akas_df, read_title_crew_df, read_title_ratings_df,
                    read_title_principals_df, read_name_basics_df, read_title_basics_df,
                    read_title_episode_df, write_df_to_csv)
-from dfs_postprocess.title_akas_postprocess import title_akas_postprocess
-from dfs_postprocess.title_crew_postprocess import title_crew_postprocess
-from dfs_postprocess.title_raitings_postprocess import title_rating_postprocess
-from dfs_postprocess.name_basics_postprocess import name_basics_postprocess
-from dfs_postprocess.name_basics_cleaning import name_basics_cleaning
-from dfs_postprocess.title_principals_postprocess import title_principals_postprocess
-from dfs_postprocess.title_principals_cleaning import title_principals_cleaning
-from dfs_postprocess.title_basics_postprocess import title_basics_postprocess
-from dfs_postprocess.title_episode_postprocess import title_episode_postprocess
-from dfs_postprocess.title_basics_cleaning import cleaning_title_basics_df
-from dfs_postprocess.title_episode_cleaning import cleaning_title_episode
+from dfs_preprocess.title_akas_preprocess import title_akas_preprocess
+from dfs_preprocess.title_crew_preprocess import title_crew_preprocess
+from dfs_preprocess.title_raitings_preprocess import title_rating_preprocess
+from dfs_preprocess.name_basics_preprocess import name_basics_preprocess
+from dfs_preprocess.name_basics_cleaning import name_basics_cleaning
+from dfs_preprocess.title_principals_preprocess import title_principals_preprocess
+from dfs_preprocess.title_principals_cleaning import title_principals_cleaning
+from dfs_preprocess.title_basics_preprocess import title_basics_preprocess
+from dfs_preprocess.title_episode_preprocess import title_episode_preprocess
+from dfs_preprocess.title_basics_cleaning import cleaning_title_basics_df
+from dfs_preprocess.title_episode_cleaning import cleaning_title_episode
 from questions import questions_sokolova
 
 # dataframes processing
 akas_df = read_akas_df(AKAS_DF_PATH)
-akas_df = title_akas_postprocess(akas_df)
+akas_df = title_akas_preprocess(akas_df)
 write_df_to_csv(akas_df, AKAS_DF_RESULTS_PATH)
 
 title_crew_df = read_title_crew_df(TITLE_CREW_DF_PATH)
-title_crew_df = title_crew_postprocess(title_crew_df)
+title_crew_df = title_crew_preprocess(title_crew_df)
 write_df_to_csv(title_crew_df, TITLE_CREW_DF_RESULTS_PATH)
 
 title_ratings_df = read_title_ratings_df(TITLE_RATINGS_DF_PATH)
-title_ratings_df = title_rating_postprocess(title_ratings_df)
+title_ratings_df = title_rating_preprocess(title_ratings_df)
 write_df_to_csv(title_ratings_df, TITLE_RATINGS_DF_RESULTS_PATH)
 
 title_principals_df = read_title_principals_df(TITLE_PRINCIPALS_DF_PATH)
-title_principals_df = title_principals_postprocess(title_principals_df)
+title_principals_df = title_principals_preprocess(title_principals_df)
 title_principals_df = title_principals_cleaning(title_principals_df)
 write_df_to_csv(title_principals_df, TITLE_PRINCIPALS_RESULTS_PATH)
 
 name_basics_df = read_name_basics_df(NAME_BASICS_DF_PATH)
-name_basics_df = name_basics_postprocess(name_basics_df)
+name_basics_df = name_basics_preprocess(name_basics_df)
 name_basics_df = name_basics_cleaning(name_basics_df)
 write_df_to_csv(name_basics_df, NAME_BASICS_DF_RESULTS_PATH)
 
 title_basics_df = read_title_basics_df(TITLE_BASICS_DF_PATH)
-title_basics_df = title_basics_postprocess(title_basics_df)
+title_basics_df = title_basics_preprocess(title_basics_df)
 title_basics_df = cleaning_title_basics_df(title_basics_df)
 write_df_to_csv(title_basics_df, TITLE_BASICS_DF_CSV_PATH)
 
 title_episode_df = read_title_episode_df(TITLE_EPISODE_DF_PATH)
-title_episode_df = title_episode_postprocess(title_episode_df)
+title_episode_df = title_episode_preprocess(title_episode_df)
 title_episode_df = cleaning_title_episode(title_episode_df)
 write_df_to_csv(title_episode_df, TITLE_EPISODE_DF_CSV_PATH)
 

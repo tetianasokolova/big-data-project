@@ -7,6 +7,6 @@ def change_column_names(title_rating_df):
     return title_rating_df
 
 
-def title_rating_postprocess(title_rating_df):
+def title_rating_preprocess(title_rating_df):
     title_rating_df = change_column_names(title_rating_df)
     return title_rating_df

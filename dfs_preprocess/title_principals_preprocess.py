@@ -17,7 +17,7 @@ def change_characters_column(title_principals_df):
                                                              f.col('characters'), r'[\[\]"]', ""))
     return title_principals_df
 
-def title_principals_postprocess(title_principals_df):
+def title_principals_preprocess(title_principals_df):
     title_principals_df = change_column_names(title_principals_df)
     title_principals_df = change_n_to_none(title_principals_df)
     title_principals_df = change_characters_column(title_principals_df)

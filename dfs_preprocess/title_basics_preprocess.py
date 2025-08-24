@@ -52,10 +52,9 @@ def change_from_int_to_boolean(title_basics_df):
     return title_basics_df
 
 
-def title_basics_postprocess(title_basics_df):
+def title_basics_preprocess(title_basics_df):
     title_basics_df = change_column_names(title_basics_df)
     title_basics_df = change_n_to_none(title_basics_df)
     title_basics_df = shift_columns(title_basics_df)
     title_basics_df = change_from_int_to_boolean(title_basics_df)
     return title_basics_df
-
