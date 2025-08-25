@@ -7,10 +7,12 @@ This project analyzes IMDb data using **PySpark**, covering movies, TV shows, pe
 ---
 ## Data Cleaning and Preprocessing
 
+A detailed table of all columns and their cleaning decisions is available in [`docs/data_cleaning_decisions.pdf`](docs/data_cleaning_decisions.pdf). For convenience, you can also view it as a [Google Sheet](https://docs.google.com/spreadsheets/d/1i52seVmuWA1UiSCvTe07IA5_Yk3pGCG0QF10QySD0oo/edit?usp=sharing) or download the [`Excel file`](docs/data_cleaning_decisions.xlsx).
+
 Before analysis, all datasets were cleaned and preprocessed to ensure consistency and reliability. The following strategies were applied:
 
 - Replaced placeholder values such as `\N` (used to represent missing data) with proper null values.
-- Removed columns with excessive missing data or they are not needed for analysis and could not be reliably filled.
+- Removed columns with excessive missing data, or they are not needed for analysis and could not be reliably filled.
 - Applied missing value handling techniques, using the **mode** for categorical fields and the **median** for numerical fields.
 
 These steps helped standardize the datasets and minimize noise in the analysis.
