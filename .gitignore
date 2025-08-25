@@ -200,5 +200,3 @@ derby.log
 *.sh
 *.conf
 *.properties
-
-setting.py
