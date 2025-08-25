@@ -9,8 +9,8 @@ This project analyzes IMDb data using **PySpark**, covering movies, TV shows, pe
 
 Before analysis, all datasets were cleaned and preprocessed to ensure consistency and reliability. The following strategies were applied:
 
-- Replaced placeholder values such as `\N` (used to represent missing data) with proper `null` values.
-- Removed rows with excessive missing data when they could not be reliably filled.
+- Replaced placeholder values such as `\N` (used to represent missing data) with proper null values.
+- Removed columns with excessive missing data or they are not needed for analysis and could not be reliably filled.
 - Applied missing value handling techniques, using the **mode** for categorical fields and the **median** for numerical fields.
 
 These steps helped standardize the datasets and minimize noise in the analysis.
@@ -77,7 +77,16 @@ Specifically, questions numbered 3, 4, 6, 8, 16, 17, 24–33, and 35–39 were a
 
 ## Data Sources and Licensing
 
-This project utilizes multiple datasets from IMDb’s official non-commercial data repository, available at [https://datasets.imdbws.com/](https://datasets.imdbws.com/). These datasets are updated regularly and provided as gzipped TSV files containing detailed information about movies, TV shows, people, ratings, and more.
+This project utilizes multiple datasets from IMDb’s official non-commercial data repository, available at [https://datasets.imdbws.com/](https://datasets.imdbws.com/).  Required datasets:
+
+- `title.basics.tsv.gz`
+- `title.akas.tsv.gz`
+- `title.crew.tsv.gz`
+- `title.principals.tsv.gz`
+- `title.ratings.tsv.gz`
+- `title.episode.tsv.gz`
+- `name.basics.tsv.gz`
+
 
 Please note the following:
 
@@ -86,6 +95,48 @@ Please note the following:
 - All use of IMDb data complies with IMDb’s [Non-Commercial Licensing Terms](https://www.imdb.com/interfaces/) and copyright policies.
 
 By including this information, the project acknowledges the data source and its licensing requirements, ensuring transparent and responsible use of IMDb data.
+
+---
+## Setup Instructions
+
+### 1. Clone the Repository
+Run the following commands to clone the repo and move into it:
+
+```bash
+git clone https://github.com/tetianasokolova/computer-vision-project.git
+cd computer-vision-project
+```
+### 2. Add IMDb Data
+
+Download the required IMDb datasets (TSV files) from [IMDb Datasets](https://datasets.imdbws.com/) and place them in a folder called `data` at the project root:
+
+```bash
+mkdir -p data
+# place the .tsv.gz files here
+```
+
+### 3. Configure Paths
+
+The default paths assume your datasets are in `data/`. Make sure the results folder exists:
+
+```bash 
+mkdir -p data/results
+```
+
+### 4. Run with Docker
+
+Build the Docker image:
+
+```bash
+docker build -t imdb-pyspark .
+```
+Run the container:
+```bash
+docker run imdb-pyspark
+```
+
+
+Results will be saved in `data/results/` according to the paths defined in settings.py.
 
 ---
 
